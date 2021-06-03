@@ -6,7 +6,7 @@ void main() {
   runApp(
     GetMaterialApp(
       // debugShowCheckedModeBanner: true,
-      initialRoute: Routes.INITIAL,
+      initialRoute: Routes.DETAILS,
       defaultTransition: Transition.fade,
       getPages: AppPages.pages,
     ),
