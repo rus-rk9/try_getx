@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_group_sliver/flutter_group_sliver.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:try_getx/app/controllers/home_page_controller.dart';
@@ -21,31 +22,40 @@ class HomePage extends GetView<HomePageController> {
                 ),
               ),
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return Container(
-                    // margin: EdgeInsets.only(top: 64),
-                    padding: EdgeInsets.only(top: 32, left: 24, right: 24, bottom: 3072),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[350],
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(24),
-                        topRight: Radius.circular(24),
+            SliverGroupBuilder(
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+                // border: Border.all(
+                //   color: Color.fromRGBO(238, 237, 238, 1),
+                // ),
+              ),
+              child: SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return Container(
+                      // margin: EdgeInsets.only(top: 64),
+                      padding: EdgeInsets.only(top: 32, left: 24, right: 24, bottom: 3072),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[350],
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(24),
+                          topRight: Radius.circular(24),
+                        ),
                       ),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        RoundedLongContainer(width: context.width * 0.6),
-                        RoundedLongContainer(width: context.width * 0.75),
-                        RoundedLongContainer(width: context.width * 0.5),
-                      ],
-                    ),
-                  );
-                },
-                childCount: 1,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          RoundedLongContainer(width: context.width * 0.6),
+                          RoundedLongContainer(width: context.width * 0.75),
+                          RoundedLongContainer(width: context.width * 0.5),
+                        ],
+                      ),
+                    );
+                  },
+                  childCount: 1,
+                ),
               ),
             ),
           ],
