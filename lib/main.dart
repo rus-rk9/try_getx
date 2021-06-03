@@ -5,7 +5,7 @@ import 'package:try_getx/app/routes/app_pages.dart';
 void main() {
   runApp(
     GetMaterialApp(
-      debugShowCheckedModeBanner: false,
+      // debugShowCheckedModeBanner: true,
       initialRoute: Routes.INITIAL,
       defaultTransition: Transition.fade,
       getPages: AppPages.pages,
