@@ -13,62 +13,101 @@ class HomePage extends GetView<HomePageController> {
       body: SafeArea(
         child: Container(
           color: Colors.transparent,
-          child: NotificationListener(
+          child: NotificationListener<ScrollUpdateNotification>(
             child: CustomScrollView(
               slivers: [
-                SliverAppBar(
-                  backgroundColor: Colors.transparent,
-                  expandedHeight: 300.0,
-                  toolbarHeight: 0,
-                  flexibleSpace: Stack(
-                    children: [
-                      Positioned(
-                        left: -120,
-                        top: -98,
-                        child: Obx(() => Transform.rotate(
-                              angle: (-Math.pi / 180) * controller.circleAngle,
-                              alignment: Alignment.center,
-                              child: Container(
-                                width: 300,
-                                height: 300,
-                                child: SvgPicture.asset(
-                                  'lib/assets/circle.svg',
-                                ),
-                              ),
-                            )),
-                      ),
-                    ],
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Container(
-                    padding: EdgeInsets.only(top: 32, left: 24, right: 24, bottom: 3072),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[350],
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(24),
-                        topRight: Radius.circular(24),
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        RoundedLongContainer(width: context.width * 0.6),
-                        RoundedLongContainer(width: context.width * 0.75),
-                        RoundedLongContainer(width: context.width * 0.5),
-                      ],
-                    ),
-                  ),
-                ),
-
-                // ),
+                sliverAppBar(),
+                sliverToBoxAdapter(context),
               ],
             ),
             onNotification: (notification) {
-              print('nofification: ${notification.toString()}');
+              controller.circleAngle = notification.metrics.extentBefore.toInt();
               return true;
             },
           ),
+        ),
+      ),
+    );
+  }
+
+  SliverAppBar sliverAppBar() {
+    return SliverAppBar(
+      backgroundColor: Colors.transparent,
+      expandedHeight: 300.0,
+      toolbarHeight: 0,
+      flexibleSpace: Stack(
+        children: [
+          Positioned(
+            left: -120,
+            top: -98,
+            child: Obx(() => Transform.rotate(
+                  angle: (-Math.pi / 180) * controller.circleAngle,
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 300,
+                    height: 300,
+                    child: SvgPicture.asset(
+                      'lib/assets/circle.svg',
+                    ),
+                  ),
+                )),
+          ),
+        ],
+      ),
+    );
+  }
+
+  SliverToBoxAdapter sliverToBoxAdapter(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Container(
+        padding: EdgeInsets.only(top: 32, left: 24, right: 24, bottom: 3072),
+        decoration: BoxDecoration(
+          color: Colors.grey[350],
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            RoundedLongContainer(width: context.width * 0.6),
+            RoundedLongContainer(width: context.width * 0.75),
+            RoundedLongContainer(width: context.width * 0.5),
+            Container(
+              height: 200,
+              child: ListView(
+                // controller: ScrollController()
+                //   ..addListener(() {
+                //     print('ListVew scrolled');
+                //   }),
+                // This next line does the trick.
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  Container(
+                    width: 160.0,
+                    color: Colors.red,
+                  ),
+                  Container(
+                    width: 160.0,
+                    color: Colors.blue,
+                  ),
+                  Container(
+                    width: 160.0,
+                    color: Colors.green,
+                  ),
+                  Container(
+                    width: 160.0,
+                    color: Colors.yellow,
+                  ),
+                  Container(
+                    width: 160.0,
+                    color: Colors.orange,
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
