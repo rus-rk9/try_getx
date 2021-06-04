@@ -76,35 +76,36 @@ class HomePage extends GetView<HomePageController> {
             RoundedLongContainer(width: context.width * 0.5),
             Container(
               height: 200,
-              child: ListView(
-                // controller: ScrollController()
-                //   ..addListener(() {
-                //     print('ListVew scrolled');
-                //   }),
-                // This next line does the trick.
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  Container(
-                    width: 160.0,
-                    color: Colors.red,
-                  ),
-                  Container(
-                    width: 160.0,
-                    color: Colors.blue,
-                  ),
-                  Container(
-                    width: 160.0,
-                    color: Colors.green,
-                  ),
-                  Container(
-                    width: 160.0,
-                    color: Colors.yellow,
-                  ),
-                  Container(
-                    width: 160.0,
-                    color: Colors.orange,
-                  ),
-                ],
+              child: NotificationListener<ScrollUpdateNotification>(
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    Container(
+                      width: 160.0,
+                      color: Colors.red,
+                    ),
+                    Container(
+                      width: 160.0,
+                      color: Colors.blue,
+                    ),
+                    Container(
+                      width: 160.0,
+                      color: Colors.green,
+                    ),
+                    Container(
+                      width: 160.0,
+                      color: Colors.yellow,
+                    ),
+                    Container(
+                      width: 160.0,
+                      color: Colors.orange,
+                    ),
+                  ],
+                ),
+                onNotification: (notification) {
+                  print('ListVew scrolled');
+                  return true;
+                },
               ),
             )
           ],

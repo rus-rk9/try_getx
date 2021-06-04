@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui' as ui;
 
 class RoundedLongContainer extends StatelessWidget {
   final double width;
@@ -18,6 +19,7 @@ class RoundedLongContainer extends StatelessWidget {
           height: 48,
           width: width,
           decoration: BoxDecoration(
+            gradient: ui.Gradient.linear([Colors.red, Colors.yellow]),
             color: Colors.white,
             borderRadius: BorderRadius.circular(24),
           ),
