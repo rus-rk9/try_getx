@@ -6,6 +6,8 @@ import 'package:try_getx/app/controllers/home_page_controller.dart';
 import 'package:try_getx/app/ui/global_widgets/rounded_long_container.dart';
 import 'dart:math' as Math;
 
+import 'package:try_getx/app/ui/global_widgets/standart_button.dart';
+
 class HomePage extends GetView<HomePageController> {
   @override
   Widget build(BuildContext context) {
@@ -74,42 +76,34 @@ class HomePage extends GetView<HomePageController> {
             RoundedLongContainer(width: context.width * 0.6),
             RoundedLongContainer(width: context.width * 0.75),
             RoundedLongContainer(width: context.width * 0.5),
-            Container(
-              height: 200,
-              child: NotificationListener<ScrollUpdateNotification>(
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    Container(
-                      width: 160.0,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      width: 160.0,
-                      color: Colors.blue,
-                    ),
-                    Container(
-                      width: 160.0,
-                      color: Colors.green,
-                    ),
-                    Container(
-                      width: 160.0,
-                      color: Colors.yellow,
-                    ),
-                    Container(
-                      width: 160.0,
-                      color: Colors.orange,
-                    ),
-                  ],
-                ),
-                onNotification: (notification) {
-                  print('ListVew scrolled');
-                  return true;
-                },
-              ),
-            )
+            buttonsRow(),
           ],
         ),
+      ),
+    );
+  }
+
+  Container buttonsRow() {
+    return Container(
+      padding: EdgeInsets.only(top: 50, bottom: 50),
+      height: 200,
+      decoration: BoxDecoration(color: Colors.transparent),
+      child: NotificationListener<ScrollUpdateNotification>(
+        child: ListView.builder(
+          itemCount: 8,
+          itemBuilder: (context, index) {
+            return Obx(() => StandartButton(
+                  color: (index == controller.buttonPressed) ? Colors.red : Colors.white,
+                  onPressed: () {
+                    controller.buttonPressed = index;
+                  },
+                ));
+          },
+          scrollDirection: Axis.horizontal,
+        ),
+        onNotification: (notification) {
+          return true;
+        },
       ),
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
 
 class RoundedLongContainer extends StatelessWidget {
   final double width;
@@ -14,12 +13,14 @@ class RoundedLongContainer extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24.0),
         ),
-        // clipBehavior: Clip.antiAlias,
         child: Container(
           height: 48,
           width: width,
           decoration: BoxDecoration(
-            gradient: ui.Gradient.linear([Colors.red, Colors.yellow]),
+            gradient: LinearGradient(
+              colors: [Colors.white, Colors.grey[200]],
+              stops: [0.8, 1.0],
+            ),
             color: Colors.white,
             borderRadius: BorderRadius.circular(24),
           ),

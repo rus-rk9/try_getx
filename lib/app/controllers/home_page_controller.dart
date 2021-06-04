@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 class HomePageController extends GetxController {
   final RxInt _circleAngle = 0.obs;
+  final RxInt _buttonPressed = (-1).obs;
   FixedScrollMetrics x;
 
   HomePageController({@required int initAngle}) {
@@ -13,4 +14,7 @@ class HomePageController extends GetxController {
 
   set circleAngle(value) => this._circleAngle.value = value;
   get circleAngle => this._circleAngle.value;
+
+  set buttonPressed(value) => this._buttonPressed.value = value;
+  get buttonPressed => this._buttonPressed.value;
 }
