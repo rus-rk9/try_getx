@@ -17,7 +17,6 @@ class HomePage extends GetView<HomePageController> {
             slivers: [
               SliverAppBar(
                 backgroundColor: Colors.transparent,
-                // collapsedHeight: 1,
                 expandedHeight: 300.0,
                 toolbarHeight: 0,
                 flexibleSpace: Stack(
@@ -25,17 +24,17 @@ class HomePage extends GetView<HomePageController> {
                     Positioned(
                       left: -120,
                       top: -98,
-                      child: Transform.rotate(
-                        angle: (-Math.pi / 180) * 0,
-                        alignment: Alignment.center,
-                        child: Container(
-                          width: 300,
-                          height: 300,
-                          child: SvgPicture.asset(
-                            'lib/assets/circle.svg',
-                          ),
-                        ),
-                      ),
+                      child: Obx(() => Transform.rotate(
+                            angle: (-Math.pi / 180) * controller.circleAngle,
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: 300,
+                              height: 300,
+                              child: SvgPicture.asset(
+                                'lib/assets/circle.svg',
+                              ),
+                            ),
+                          )),
                     ),
                   ],
                 ),

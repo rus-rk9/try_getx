@@ -1,12 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:try_getx/app/data/repository/home_page_repo.dart';
 
 class HomePageController extends GetxController {
-  final HomePageRepository repository;
-  HomePageController({@required this.repository}) : assert(repository != null);
+  final RxInt _circleAngle = 0.obs;
 
-  final _obj = ''.obs;
-  set obj(value) => this._obj.value = value;
-  get obj => this._obj.value;
+  HomePageController({@required int initAngle}) {
+    assert(initAngle >= 0);
+    _circleAngle.value = initAngle;
+  }
+
+  set circleAngle(value) => this._circleAngle.value = value;
+  get circleAngle => this._circleAngle.value;
 }
