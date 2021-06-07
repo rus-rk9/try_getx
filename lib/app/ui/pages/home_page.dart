@@ -90,7 +90,7 @@ class HomePage extends GetView<HomePageController> {
       decoration: BoxDecoration(color: Colors.transparent),
       child: NotificationListener<ScrollUpdateNotification>(
         child: ListView.builder(
-          itemCount: 8,
+          itemCount: HomePageController.buttonMax,
           itemBuilder: (context, index) {
             return Obx(() => StandartButton(
                   color: (index == controller.buttonPressed) ? Colors.red : Colors.white,
