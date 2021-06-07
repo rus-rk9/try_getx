@@ -1,21 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:try_getx/app/data/models/home_page_model.dart';
 
 class HomePageController extends GetxController {
-  final RxInt _circleAngle = 0.obs;
-  final RxInt _buttonPressed = (-1).obs;
-  static const int buttonMax = 4;
-  // FixedScrollMetrics x;
+  HomePageModel _model;
 
   HomePageController({@required int initAngle}) {
-    assert(initAngle >= 0);
-    _circleAngle.value = initAngle;
+    this._model = HomePageModel(angle: initAngle);
   }
 
-  set circleAngle(value) => this._circleAngle.value = value;
-  get circleAngle => this._circleAngle.value;
+  set circleAngle(value) => this._model.circleAngle.value = value;
+  get circleAngle => this._model.circleAngle.value;
 
-  set buttonPressed(value) => this._buttonPressed.value = value;
-  get buttonPressed => this._buttonPressed.value;
+  set buttonPressed(value) => this._model.buttonPressed.value = value;
+  get buttonPressed => this._model.buttonPressed.value;
 }
