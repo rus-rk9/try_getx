@@ -12,6 +12,7 @@ import 'dart:math' as Math;
 import 'package:try_getx/app/ui/global_widgets/standart_button.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
+//основной экран
 class HomePage extends GetView<HomePageController> {
   @override
   Widget build(BuildContext context) {
@@ -45,6 +46,7 @@ class HomePage extends GetView<HomePageController> {
     );
   }
 
+  //бар экрана
   SliverAppBar sliverAppBar() {
     return SliverAppBar(
       backgroundColor: Colors.transparent,
@@ -72,6 +74,7 @@ class HomePage extends GetView<HomePageController> {
     );
   }
 
+  //виджет экрана
   SliverToBoxAdapter sliverToBoxAdapter(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
@@ -96,6 +99,7 @@ class HomePage extends GetView<HomePageController> {
     );
   }
 
+  //кнопки
   Container buttonsRow() {
     return Container(
       padding: EdgeInsets.only(top: 50, bottom: 50),

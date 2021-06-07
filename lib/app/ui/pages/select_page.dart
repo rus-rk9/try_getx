@@ -4,6 +4,7 @@ import 'package:try_getx/app/controllers/home_page_controller.dart';
 import 'package:try_getx/app/controllers/select_page_controller.dart';
 import 'package:try_getx/app/data/models/home_page_model.dart';
 
+//экран задания индекса кнопки
 class SelectPage extends GetView<SelectPageController> {
   @override
   Widget build(BuildContext context) {
