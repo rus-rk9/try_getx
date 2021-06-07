@@ -3,11 +3,14 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:try_getx/app/controllers/home_page_controller.dart';
+import 'package:try_getx/app/controllers/select_page_controller.dart';
 import 'package:try_getx/app/data/models/home_page_model.dart';
+import 'package:try_getx/app/routes/app_pages.dart';
 import 'package:try_getx/app/ui/global_widgets/rounded_long_container.dart';
 import 'dart:math' as Math;
 
 import 'package:try_getx/app/ui/global_widgets/standart_button.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 class HomePage extends GetView<HomePageController> {
   @override
@@ -16,8 +19,7 @@ class HomePage extends GetView<HomePageController> {
       body: SafeArea(
         child: Container(
           color: Colors.transparent,
-          // child: NotificationListener<ScrollUpdateNotification>(
-          child: NotificationListener<ScrollUpdateNotification>(
+          child: NotificationListener<ScrollNotification>(
             child: CustomScrollView(
               slivers: [
                 sliverAppBar(),
@@ -25,11 +27,16 @@ class HomePage extends GetView<HomePageController> {
               ],
             ),
             onNotification: (notification) {
-              if (notification is ScrollUpdateNotification) {
-                controller.circleAngle = notification.metrics.extentBefore.toInt();
-                print(notification.toString());
+              if (notification is ScrollEndNotification) {
+                controller.isTopPositionAlerted = false;
               }
-
+              controller.circleAngle = notification.metrics.extentBefore.toInt();
+              if (HomePageController.checkIntInInterval(currVal: notification.metrics.pixels.toInt(), mainVal: HomePageModel.appBarExpandedHeight, delta: 4)) {
+                if (!controller.isTopPositionAlerted) {
+                  Get.snackbar('Внимание!', 'Верхняя граница достигнута');
+                  controller.isTopPositionAlerted = true;
+                }
+              }
               return true;
             },
           ),
@@ -41,7 +48,7 @@ class HomePage extends GetView<HomePageController> {
   SliverAppBar sliverAppBar() {
     return SliverAppBar(
       backgroundColor: Colors.transparent,
-      expandedHeight: 300.0,
+      expandedHeight: HomePageModel.appBarExpandedHeight.toDouble(),
       toolbarHeight: 0,
       flexibleSpace: Stack(
         children: [
@@ -94,15 +101,24 @@ class HomePage extends GetView<HomePageController> {
       padding: EdgeInsets.only(top: 50, bottom: 50),
       height: 200,
       decoration: BoxDecoration(color: Colors.transparent),
-      child: NotificationListener<ScrollUpdateNotification>(
+      child: NotificationListener<ScrollNotification>(
         child: ListView.builder(
+          controller: controller.scrollController,
           itemCount: HomePageModel.buttonMax,
           itemBuilder: (context, index) {
-            return Obx(() => StandartButton(
-                  color: (index == controller.buttonPressed) ? Colors.red : Colors.white,
-                  onPressed: () {
-                    controller.buttonPressed = index;
-                  },
+            return Obx(() => AutoScrollTag(
+                  key: ValueKey(index),
+                  controller: controller.scrollController,
+                  index: index,
+                  child: StandartButton(
+                    text: index.toString(),
+                    color: (index == controller.buttonPressedIndex) ? Colors.red : Colors.white,
+                    onPressed: () {
+                      controller.buttonPressedIndex = index;
+                      Get.lazyPut<SelectPageController>(() => SelectPageController());
+                      Get.toNamed(Routes.SELECT);
+                    },
+                  ),
                 ));
           },
           scrollDirection: Axis.horizontal,

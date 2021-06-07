@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:try_getx/app/controllers/details_page_controller.dart';
+import 'package:try_getx/app/controllers/select_page_controller.dart';
 import 'package:try_getx/app/controllers/home_page_controller.dart';
 
 class HomePageBinding implements Bindings {
@@ -8,8 +8,8 @@ class HomePageBinding implements Bindings {
     Get.lazyPut<HomePageController>(
       () => HomePageController(initAngle: 0),
     );
-    Get.lazyPut<DetailsPageController>(
-      () => DetailsPageController(),
+    Get.lazyPut<SelectPageController>(
+      () => SelectPageController(),
     );
   }
 }

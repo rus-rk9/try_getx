@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class StandartButton extends StatelessWidget {
   final void Function() onPressed;
   final Color color;
-  StandartButton({@required this.onPressed, @required this.color});
+  final String text;
+  StandartButton({@required this.onPressed, @required this.color, @required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,10 @@ class StandartButton extends StatelessWidget {
           primary: color,
           elevation: 0,
         ),
-        child: SizedBox(),
+        child: Text(
+          text,
+          style: TextStyle(color: Colors.blueAccent),
+        ),
       ),
     );
   }
