@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//виджет декоративный
 class RoundedLongContainer extends StatelessWidget {
   final double width;
   RoundedLongContainer({@required this.width});

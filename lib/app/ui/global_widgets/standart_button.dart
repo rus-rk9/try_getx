@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//виджет кнопки
 class StandartButton extends StatelessWidget {
   final void Function() onPressed;
   final Color color;

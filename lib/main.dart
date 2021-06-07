@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:try_getx/app/routes/app_pages.dart';
 
 void main() {
-  debugRepaintRainbowEnabled = false;
+  debugRepaintRainbowEnabled = true;
   runApp(
     GetMaterialApp(
       initialRoute: Routes.INITIAL,
