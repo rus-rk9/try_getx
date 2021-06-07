@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:try_getx/app/controllers/home_page_controller.dart';
+import 'package:try_getx/app/data/models/home_page_model.dart';
 import 'package:try_getx/app/ui/global_widgets/rounded_long_container.dart';
 import 'dart:math' as Math;
 
@@ -15,6 +16,7 @@ class HomePage extends GetView<HomePageController> {
       body: SafeArea(
         child: Container(
           color: Colors.transparent,
+          // child: NotificationListener<ScrollUpdateNotification>(
           child: NotificationListener<ScrollUpdateNotification>(
             child: CustomScrollView(
               slivers: [
@@ -23,7 +25,11 @@ class HomePage extends GetView<HomePageController> {
               ],
             ),
             onNotification: (notification) {
-              controller.circleAngle = notification.metrics.extentBefore.toInt();
+              if (notification is ScrollUpdateNotification) {
+                controller.circleAngle = notification.metrics.extentBefore.toInt();
+                print(notification.toString());
+              }
+
               return true;
             },
           ),
@@ -90,7 +96,7 @@ class HomePage extends GetView<HomePageController> {
       decoration: BoxDecoration(color: Colors.transparent),
       child: NotificationListener<ScrollUpdateNotification>(
         child: ListView.builder(
-          itemCount: HomePageController.buttonMax,
+          itemCount: HomePageModel.buttonMax,
           itemBuilder: (context, index) {
             return Obx(() => StandartButton(
                   color: (index == controller.buttonPressed) ? Colors.red : Colors.white,
